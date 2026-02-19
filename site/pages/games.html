@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Games | NeoArc Engine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Inter font as in index.html -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+    <link rel="stylesheet" href="/assets/css/style.css">
+  </head>
+  <body class="page--games" style="background: #fff;">
+    <!-- Navigation Bar -->
+    <header class="navbar" id="navbar">
+      <div class="container navbar__inner">
+        <a class="navbar__logo" href="/">NeoArc Engine</a>
+        <nav class="navbar__nav" aria-label="Main Navigation">
+          <ul class="navbar__list">
+            <li><a href="/#games" class="navbar__link">Games</a></li>
+            <li><a href="/#download" class="navbar__link">Download</a></li>
+            <li><a href="/#wiki" class="navbar__link">Wiki</a></li>
+            <li><a href="/#versions" class="navbar__link">Versions</a></li>
+            <li><a href="/#support" class="navbar__link">Support</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero hero--games" id="games-hero">
+      <div class="container hero__container">
+        <h2 class="hero__subtitle" style="color: #2563eb; font-size:1.1rem; font-weight:600; letter-spacing:0.02em;">
+          Explore All Games
+        </h2>
+      </div>
+    </section>
+
+    <!-- Search bar section -->
+    <section class="games-search" id="games-search">
+      <div class="container games-search__container">
+        <input 
+          type="search" 
+          class="games-search__input" 
+          id="games-search-input" 
+          placeholder="Search games by name, genre, or platform…" 
+          autocomplete="off"
+          aria-label="Search games"
+        >
+      </div>
+    </section>
+
+    <!-- Games List -->
+    <main class="games-list-section" id="games-list-section">
+      <div class="container">
+        <div class="games-list" id="games-list" aria-live="polite">
+          <!-- Cards will be loaded by JS -->
+        </div>
+        <!-- When no games are found -->
+        <div id="games-empty" style="display:none; text-align:center; padding:2rem; color:#999; font-size:1.1rem;">
+          No games found.
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container footer__container">
+        <div class="footer__left">
+          © <span id="year"></span> NeoArc Engine
+        </div>
+        <nav class="footer__nav" aria-label="Footer Navigation">
+          <ul class="footer__links">
+            <li><a href="#status" class="footer__link">Status</a></li>
+            <li><a href="#creators" class="footer__link">Creators</a></li>
+            <li><a href="https://github.com/neoarcengine" rel="noopener" class="footer__link">GitHub</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+
+    <script src="/assets/js/script.js" defer></script>
+    <script>
+      // Show current year in footer (No inline CSS/JS except minimal for year as in index.html)
+      document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('year').textContent = new Date().getFullYear();
+      });
+
+      // Games loading and filtering
+      document.addEventListener('DOMContentLoaded', function() {
+        const gamesList = document.getElementById('games-list');
+        const searchInput = document.getElementById('games-search-input');
+        const emptyState = document.getElementById('games-empty');
+        let gamesData = [];
+
+        // Utility: create platform badge markup (with blue highlight)
+        function platformBadge(platform) {
+          return `<span class="games-card__platform" style="background:#f3f4f6;color:#2563eb;border-radius:4px;padding:2px 7px;font-size:0.92em;font-weight:600;margin-right:6px;display:inline-block">${platform}</span>`;
+        }
+
+        function renderGames(filtered) {
+          gamesList.innerHTML = '';
+          if (!filtered.length) {
+            gamesList.style.display = 'none';
+            emptyState.style.display = '';
+            return;
+          }
+          gamesList.style.display = '';
+          emptyState.style.display = 'none';
+          filtered.forEach((game, i) => {
+            const card = document.createElement('article');
+            card.className = 'games-card';
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('data-animate','fade-up');
+            card.setAttribute('data-animate-delay', String(i * 90)); // slight stagger
+            card.innerHTML = `
+              <header class="games-card__header">
+                <h3 class="games-card__title" style="font-size:1.34rem; color:#222;font-weight:700;margin-bottom:0.15em">${game.name}</h3>
+                <span class="games-card__genre" style="font-size:1em;color:#7a859a;background:#f3f4f6;border-radius:4px;padding:2px 8px;">${game.genre}</span>
+              </header>
+              <div class="games-card__meta" style="margin:0.9em 0 0.6em 0;">
+                ${game.platforms.map(platformBadge).join('')}
+              </div>
+              <div class="games-card__version" style="color:#4b5563; font-size:0.95em; margin-bottom:1em">
+                Version <span class="games-card__vernum" style="font-weight:600;color:#2563eb">${game.version}</span>
+              </div>
+              <div class="games-card__install">
+                <code class="games-card__cmd" style="display:inline-block;padding:0.42em 0.92em;background:#f8fafc;color:#2563eb;border-radius:5px;font-size:1em">frecli install <span style="font-weight:600">${game.id}</span></code>
+                <button class="btn btn--primary btn--install" type="button" data-game="${game.id}" style="margin-left:0.7em;">Copy</button>
+              </div>
+            `;
+            gamesList.appendChild(card);
+          });
+
+          // Animate cards on scroll using script.js (assumed for fade-up)
+        }
+
+        // Fetch games
+        fetch('/games/games.json')
+          .then(res => res.json())
+          .then(data => {
+            gamesData = data.games || [];
+            renderGames(gamesData);
+          });
+
+        // Search functionality (client-side filter)
+        searchInput.addEventListener('input', function() {
+          const q = this.value.toLowerCase().trim();
+          const filtered = gamesData.filter(game =>
+            game.name.toLowerCase().includes(q) ||
+            game.genre.toLowerCase().includes(q) ||
+            game.platforms.join(' ').toLowerCase().includes(q) ||
+            game.id.toLowerCase().includes(q)
+          );
+          renderGames(filtered);
+        });
+
+        // Copy install command to clipboard (delegated)
+        gamesList.addEventListener('click', function(e){
+          if(e.target.matches('.btn--install')){
+            const gameId = e.target.getAttribute('data-game');
+            const cmd = `frecli install ${gameId}`;
+            navigator.clipboard.writeText(cmd);
+            e.target.textContent = 'Copied!';
+            setTimeout(()=>e.target.textContent='Copy', 1050);
+          }
+        });
+
+      });
+    </script>
+  </body>
+</html>

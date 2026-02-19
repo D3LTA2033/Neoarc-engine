@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Games | NeoArc Engine</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+  </head>
+  <body class="page--search" style="background: #fff;">
+    <!-- Navigation Bar -->
+    <header class="navbar" id="navbar">
+      <div class="container navbar__inner">
+        <a class="navbar__logo" href="/">NeoArc Engine</a>
+        <nav class="navbar__nav" aria-label="Main Navigation">
+          <ul class="navbar__list">
+            <li><a href="/#games" class="navbar__link">Games</a></li>
+            <li><a href="/#download" class="navbar__link">Download</a></li>
+            <li><a href="/#wiki" class="navbar__link">Wiki</a></li>
+            <li><a href="/#versions" class="navbar__link">Versions</a></li>
+            <li><a href="/#support" class="navbar__link">Support</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero/Search Section -->
+    <section class="hero hero--search" id="search-hero">
+      <div class="container hero__container">
+        <h1 class="hero__title" style="color: #2563eb;">Find Games</h1>
+        <p class="hero__subtitle" style="color: #4b5563;">
+          Search the NeoArc Engine games library by title, genre, or platform.
+        </p>
+        <form class="search-form" autocomplete="off" role="search" aria-label="Search games">
+          <input
+            type="search"
+            class="search-form__input"
+            id="game-search-input"
+            placeholder="Search games…"
+            aria-label="Search games"
+            autofocus
+          >
+        </form>
+      </div>
+    </section>
+
+    <!-- Search Results Section -->
+    <main class="search-results-section" id="search-results-section">
+      <div class="container">
+        <div class="search-results-list" id="search-results-list" aria-live="polite"></div>
+        <div class="search-empty-message" id="search-empty-message" style="display:none; text-align:center; color:#999; font-size:1.1rem; padding:2rem;">
+          No games found. Try another search.
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container footer__container">
+        <div class="footer__left">
+          © <span id="year"></span> NeoArc Engine
+        </div>
+        <nav class="footer__nav" aria-label="Footer Navigation">
+          <ul class="footer__links">
+            <li><a href="#status" class="footer__link">Status</a></li>
+            <li><a href="#creators" class="footer__link">Creators</a></li>
+            <li><a href="https://github.com/neoarcengine" rel="noopener" class="footer__link">GitHub</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+
+    <script src="/assets/js/script.js" defer></script>
+    <script>
+      // Show year in footer
+      document.addEventListener('DOMContentLoaded', function() {
+        var yearSpan = document.getElementById('year');
+        if(yearSpan) yearSpan.textContent = new Date().getFullYear();
+      });
+
+      // Games search logic
+      document.addEventListener('DOMContentLoaded', () => {
+        const input = document.getElementById('game-search-input');
+        const list = document.getElementById('search-results-list');
+        const emptyMsg = document.getElementById('search-empty-message');
+        let games = [];
+
+        // Card template function
+        function createGameCard(game, delay) {
+          const card = document.createElement('article');
+          card.className = 'game-card';
+          card.setAttribute('tabindex', '0');
+          card.setAttribute('data-animate', 'fade-up');
+          card.setAttribute('data-animate-delay', delay);
+
+          card.innerHTML = `
+            <h2 class="game-card__title" style="color:#2563eb;">${game.name}</h2>
+            <dl class="game-card__meta">
+              <dt>Genre:</dt>
+              <dd>${game.genre || '—'}</dd>
+              <dt>Platforms:</dt>
+              <dd>
+                ${Array.isArray(game.platforms) ? game.platforms.join(', ') : (game.platforms || '—')}
+              </dd>
+              <dt>Version:</dt>
+              <dd>${game.version || '—'}</dd>
+            </dl>
+            <div class="game-card__install">
+              <code>frecli install <strong>${game.id}</strong></code>
+            </div>
+          `;
+          return card;
+        }
+
+        function renderGames(filtered) {
+          list.innerHTML = '';
+          (filtered || []).forEach((game, i) => {
+            const card = createGameCard(game, i * 80);
+            list.appendChild(card);
+          });
+          if (filtered.length === 0) {
+            emptyMsg.style.display = '';
+          } else {
+            emptyMsg.style.display = 'none';
+          }
+          // Animate in
+          requestAnimationFrame(() => {
+            Array.from(list.children).forEach(card => {
+              card.classList.add('animate-in');
+            });
+          });
+        }
+
+        function filterGames(query) {
+          if (!query) return games;
+          const q = query.toLowerCase();
+          return games.filter(game =>
+            (game.name && game.name.toLowerCase().includes(q)) ||
+            (game.genre && game.genre.toLowerCase().includes(q)) ||
+            (Array.isArray(game.platforms) && game.platforms.some(p => p.toLowerCase().includes(q)))
+          );
+        }
+
+        // Fetch games from JSON
+        fetch('/games/games.json')
+          .then(res => res.json())
+          .then(data => {
+            games = Array.isArray(data) ? data : (Array.isArray(data.games) ? data.games : []);
+            renderGames(games);
+          });
+
+        // Search handler with debounce
+        let debounceTimer;
+        input && input.addEventListener('input', (e) => {
+          clearTimeout(debounceTimer);
+          debounceTimer = setTimeout(() => {
+            const query = input.value.trim();
+            const filtered = filterGames(query);
+            renderGames(filtered);
+          }, 100);
+        });
+
+        // Input focus animation (CSS-driven)
+        input && input.addEventListener('focus', () => {
+          input.classList.add('search-form__input--focused');
+        });
+        input && input.addEventListener('blur', () => {
+          input.classList.remove('search-form__input--focused');
+        });
+      });
+    </script>
+  </body>
+</html>

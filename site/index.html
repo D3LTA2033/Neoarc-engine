@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeoArc Engine</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+    <link rel="stylesheet" href="/assets/css/style.css">
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <header class="navbar" id="navbar">
+      <div class="container navbar__inner">
+        <a class="navbar__logo" href="/">NeoArc Engine</a>
+        <nav class="navbar__nav" aria-label="Main Navigation">
+          <ul class="navbar__list">
+            <li><a href="#games" class="navbar__link">Games</a></li>
+            <li><a href="#download" class="navbar__link">Download</a></li>
+            <li><a href="#wiki" class="navbar__link">Wiki</a></li>
+            <li><a href="#versions" class="navbar__link">Versions</a></li>
+            <li><a href="#support" class="navbar__link">Support</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="container hero__container">
+        <h1 class="hero__title">Power. Speed. Anywhere.</h1>
+        <p class="hero__subtitle">
+          A lightweight CLI-powered game platform built for Windows, macOS, Linux and custom systems.
+        </p>
+        <div class="hero__actions">
+          <a href="#download" class="btn btn--primary hero__btn" id="download-btn">Download FreCLI</a>
+          <a href="#games" class="btn btn--secondary hero__btn">Browse Games</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+      <div class="container features__container">
+        <div class="features__list">
+          <article class="feature-card" data-animate="fade-up">
+            <h3 class="feature-card__title">Fast Performance</h3>
+            <p class="feature-card__desc">Optimized for low latency and rapid game launches across any hardware.</p>
+          </article>
+          <article class="feature-card" data-animate="fade-up" data-animate-delay="100">
+            <h3 class="feature-card__title">Cross-Platform</h3>
+            <p class="feature-card__desc">Seamlessly deploy games on Windows, macOS, Linux and more.</p>
+          </article>
+          <article class="feature-card" data-animate="fade-up" data-animate-delay="200">
+            <h3 class="feature-card__title">CLI Powered</h3>
+            <p class="feature-card__desc">Control your game library and updates through a modern, scriptable CLI.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLI Preview Section -->
+    <section class="cli-preview" id="cli">
+      <div class="container cli-preview__container">
+        <div class="cli-terminal" aria-label="CLI Preview">
+          <div class="cli-terminal__header">
+            <span class="cli-terminal__dot cli-terminal__dot--red"></span>
+            <span class="cli-terminal__dot cli-terminal__dot--yellow"></span>
+            <span class="cli-terminal__dot cli-terminal__dot--green"></span>
+          </div>
+          <div class="cli-terminal__body" id="cli-typing">
+            <!-- The JS will animate command typing here -->
+            <span data-cmd>frecli search fps</span>
+            <br>
+            <span data-cmd>frecli install voidstrike</span>
+            <br>
+            <span data-cmd>frecli update</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container footer__container">
+        <div class="footer__left">
+          © <span id="year"></span> NeoArc Engine
+        </div>
+        <nav class="footer__nav" aria-label="Footer Navigation">
+          <ul class="footer__links">
+            <li><a href="#status" class="footer__link">Status</a></li>
+            <li><a href="#creators" class="footer__link">Creators</a></li>
+            <li><a href="https://github.com/neoarcengine" rel="noopener" class="footer__link">GitHub</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+    <script src="/assets/js/script.js" defer></script>
+    <script>
+      // Show current year in footer
+      document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('year').textContent = new Date().getFullYear();
+      });
+    </script>
+  </body>
+</html>
