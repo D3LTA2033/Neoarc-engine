@@ -1,0 +1,30 @@
+[
+  {
+    "id": "voidstrike",
+    "name": "VoidStrike",
+    "genre": "FPS",
+    "platforms": ["windows", "linux", "macos"],
+    "version": "1.2.0"
+  },
+  {
+    "id": "stardust",
+    "name": "Stardust",
+    "genre": "Puzzle",
+    "platforms": ["windows", "linux", "macos"],
+    "version": "0.9.1"
+  },
+  {
+    "id": "cli-quest",
+    "name": "CLI Quest",
+    "genre": "Adventure",
+    "platforms": ["windows", "linux", "macos"],
+    "version": "2.0.0"
+  },
+  {
+    "id": "neon-runner",
+    "name": "Neon Runner",
+    "genre": "Arcade",
+    "platforms": ["windows", "linux"],
+    "version": "1.0.3"
+  }
+]

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Hub | NeoArc Engine</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;600;700&display=swap">
+    <link rel="stylesheet" href="/assets/css/style.css">
+  </head>
+  <body class="page--learning">
+    <header class="navbar" id="navbar">
+      <div class="container navbar__inner">
+        <a class="navbar__logo" href="/">NeoArc Engine</a>
+        <nav class="navbar__nav" aria-label="Main Navigation">
+          <ul class="navbar__list">
+            <li><a href="/pages/games.html" class="navbar__link">Games</a></li>
+            <li><a href="/pages/download.html" class="navbar__link">Download</a></li>
+            <li><a href="/pages/wiki.html" class="navbar__link">Wiki</a></li>
+            <li><a href="/pages/versions.html" class="navbar__link">Versions</a></li>
+            <li><a href="/pages/support.html" class="navbar__link">Support</a></li>
+            <li><a href="/pages/learning.html" class="navbar__link">Learn</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero hero--learning" id="learning-hero">
+      <div class="container hero__container">
+        <h1 class="hero__title">Learning Hub</h1>
+        <p class="hero__subtitle">Tutorials, exercises, challenges, and CLI coding examples.</p>
+      </div>
+    </section>
+
+    <section class="games-search" id="learning-search">
+      <div class="container games-search__container">
+        <input
+          type="search"
+          class="games-search__input"
+          id="learning-search-input"
+          placeholder="Search by topic, language, or difficulty…"
+          autocomplete="off"
+          aria-label="Search tutorials and exercises"
+        >
+      </div>
+    </section>
+
+    <main class="learning-list-section">
+      <div class="container">
+        <div class="learning-list" id="learning-list" aria-live="polite"></div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer__container">
+        <div class="footer__left">© <span id="year"></span> NeoArc Engine</div>
+        <nav class="footer__nav" aria-label="Footer Navigation">
+          <ul class="footer__links">
+            <li><a href="/pages/status.html" class="footer__link">Status</a></li>
+            <li><a href="/pages/creators.html" class="footer__link">Creators</a></li>
+            <li><a href="https://github.com/neoarcengine" rel="noopener noreferrer" class="footer__link">GitHub</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+    <script src="/assets/js/script.js" defer></script>
+  </body>
+</html>

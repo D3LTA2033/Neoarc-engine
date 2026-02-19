@@ -1,0 +1,47 @@
+[
+  {
+    "id": "intro-js",
+    "title": "Introduction to JavaScript",
+    "type": "tutorial",
+    "difficulty": "Beginner",
+    "description": "Learn the basics of JS syntax and variables.",
+    "platforms": ["windows", "linux", "macos"],
+    "command": "frecli run intro-js"
+  },
+  {
+    "id": "cli-fun",
+    "title": "CLI Coding Challenge",
+    "type": "exercise",
+    "difficulty": "Intermediate",
+    "description": "Write scripts in FreCLI to automate tasks.",
+    "platforms": ["windows", "linux", "macos"],
+    "command": "frecli run cli-fun"
+  },
+  {
+    "id": "python-basics",
+    "title": "Python Basics",
+    "type": "tutorial",
+    "difficulty": "Beginner",
+    "description": "Variables, loops, and functions in Python.",
+    "platforms": ["windows", "linux", "macos"],
+    "command": "frecli run python-basics"
+  },
+  {
+    "id": "advanced-scripting",
+    "title": "Advanced Scripting",
+    "type": "challenge",
+    "difficulty": "Advanced",
+    "description": "Combine FreCLI with shell scripts for powerful workflows.",
+    "platforms": ["windows", "linux", "macos"],
+    "command": "frecli run advanced-scripting"
+  },
+  {
+    "id": "game-mod-basics",
+    "title": "Game Modding Basics",
+    "type": "tutorial",
+    "difficulty": "Intermediate",
+    "description": "Introduction to modding NeoArc games.",
+    "platforms": ["windows", "linux", "macos"],
+    "command": "frecli run game-mod-basics"
+  }
+]

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiki | NeoArc Engine</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;600;700&display=swap">
+    <link rel="stylesheet" href="/assets/css/style.css">
+  </head>
+  <body class="page--wiki">
+    <header class="navbar" id="navbar">
+      <div class="container navbar__inner">
+        <a class="navbar__logo" href="/">NeoArc Engine</a>
+        <nav class="navbar__nav" aria-label="Main Navigation">
+          <ul class="navbar__list">
+            <li><a href="/pages/games.html" class="navbar__link">Games</a></li>
+            <li><a href="/pages/download.html" class="navbar__link">Download</a></li>
+            <li><a href="/pages/wiki.html" class="navbar__link">Wiki</a></li>
+            <li><a href="/pages/versions.html" class="navbar__link">Versions</a></li>
+            <li><a href="/pages/support.html" class="navbar__link">Support</a></li>
+            <li><a href="/pages/learning.html" class="navbar__link">Learn</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero hero--wiki" id="wiki-hero">
+      <div class="container hero__container">
+        <h1 class="hero__title">NeoArc Engine Wiki</h1>
+        <p class="hero__subtitle">
+          Tutorials, guides, coding tips, and learning paths.
+        </p>
+      </div>
+    </section>
+
+    <section class="wiki-search" id="wiki-search">
+      <div class="container wiki-search__container">
+        <input
+          type="search"
+          class="wiki-search__input"
+          id="wiki-search-input"
+          placeholder="Search tutorials by topic, command, or keyword…"
+          autocomplete="off"
+          aria-label="Search wiki"
+        >
+      </div>
+    </section>
+
+    <main class="wiki-tutorials-section" id="wiki-tutorials-section">
+      <div class="container">
+        <div class="wiki-tutorials-list" id="wiki-tutorials-list" aria-live="polite">
+          <article class="tutorial-card" data-animate="fade-up" tabindex="0">
+            <h2 class="tutorial-card__title">Getting Started with FreCLI</h2>
+            <p class="tutorial-card__desc">Install FreCLI, browse supported games, and launch your first title.</p>
+            <a href="/pages/download.html" class="tutorial-card__link">Read more →</a>
+          </article>
+          <article class="tutorial-card" data-animate="fade-up" data-animate-delay="100" tabindex="0">
+            <h2 class="tutorial-card__title">Basic CLI Commands</h2>
+            <p class="tutorial-card__desc">Learn essential commands to search, install, update, or remove games.</p>
+            <a href="/pages/learning.html" class="tutorial-card__link">Read more →</a>
+          </article>
+          <article class="tutorial-card" data-animate="fade-up" data-animate-delay="200" tabindex="0">
+            <h2 class="tutorial-card__title">Advanced Usage &amp; Scripting</h2>
+            <p class="tutorial-card__desc">Automate tasks, configure environments, and integrate with other tools.</p>
+            <a href="/pages/learning.html" class="tutorial-card__link">Read more →</a>
+          </article>
+          <article class="tutorial-card" data-animate="fade-up" data-animate-delay="300" tabindex="0">
+            <h2 class="tutorial-card__title">Coding Tips &amp; Best Practices</h2>
+            <p class="tutorial-card__desc">Write clean scripts and use FreCLI effectively in your workflow.</p>
+            <a href="/pages/learning.html" class="tutorial-card__link">Read more →</a>
+          </article>
+        </div>
+        <div class="no-results wiki-empty" id="wiki-empty" style="display: none;">No tutorials found.</div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer__container">
+        <div class="footer__left">© <span id="year"></span> NeoArc Engine</div>
+        <nav class="footer__nav" aria-label="Footer Navigation">
+          <ul class="footer__links">
+            <li><a href="/pages/status.html" class="footer__link">Status</a></li>
+            <li><a href="/pages/creators.html" class="footer__link">Creators</a></li>
+            <li><a href="https://github.com/neoarcengine" rel="noopener noreferrer" class="footer__link">GitHub</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+    <script src="/assets/js/script.js" defer></script>
+  </body>
+</html>
