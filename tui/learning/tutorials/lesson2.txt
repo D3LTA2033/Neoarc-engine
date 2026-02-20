@@ -1,0 +1,5 @@
+NeoArc Lesson 2: Game Loop
+==========================
+- A game loop: input -> update -> render -> repeat.
+- Frame rate is controlled by timer_sleep_ms.
+- Use input_poll() to read keyboard without blocking.
