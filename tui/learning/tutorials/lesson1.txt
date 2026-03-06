@@ -1,5 +1,0 @@
-NeoArc Lesson 1: Terminal Basics
-================================
-- The terminal is a text-based display.
-- ANSI escape codes control cursor position and colors.
-- NeoArc uses FreCLI for low-level terminal I/O.

@@ -1,5 +1,0 @@
-NeoArc Lesson 3: Sprites and Collision
-======================================
-- Sprites are 2D character grids.
-- Use sprite_blit to draw onto the renderer.
-- collision_box_box checks rectangle overlap.
